@@ -1,0 +1,22 @@
+name: Demo Check
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Verify required files
+        run: |
+          test -f README.md
+          test -f index.html
+          test -f app.js
+          test -f style.css
+
+      - name: Simple JavaScript syntax check
+        run: node --check app.js
